@@ -37,9 +37,13 @@ export default class App extends React.Component {
                 <h1>Hello World</h1>
                 <form onSubmit={this.onSubmit}>
                     <input 
-                        type="text" 
+                        type="text"
+                        name="text"
+                        id="text" 
                         value={this.state.text} 
-                        onChange={this.handleInput} 
+                        onChange={(event)=> {
+                            this.setState({text: event.target.value})
+                        }} 
                     />
                     <button type="submit">Add</button>
                 </form>

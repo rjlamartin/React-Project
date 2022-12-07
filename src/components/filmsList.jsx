@@ -13,16 +13,21 @@ class FilmsList extends Component {
   }
 
   getFilms() {
-    fetch("https://ghibliapi.herokuapp.com/films")
+    //Consuming the promise
+    //1) .then()
+    //2)  async/await
+    fetch("https://studioghibliapi-d6fc8.web.app/films/")
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        //Update the state
+        // Update the state
         this.setState({
           list: result,
         });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   componentDidMount() {
@@ -33,20 +38,22 @@ class FilmsList extends Component {
     return (
       <ul>
         {this.state.list.map((film) => {
-          return <li key={film.id}>{film.title}</li>;
+          return (
+            <li key={film.id}>
+              <p>
+                {film.title} ---- {film.rt_score}%
+              </p>
+              <img src={film.image} alt="Movie Poster" />
+            </li>
+          );
         })}
       </ul>
+      //ul
+      //{this.state.list.map((element, index, array) => {
+      //return <li>{element.title}</li>
+      //})}
     );
   }
 }
 
 export default FilmsList;
-
-//    render() {
-//        return <ul>
-//            {this.state.list.map((element, index, array) => {
-//                return <li key={element.id}>{element.title}</li>
-//            })}
-//        </ul>;
-//    }
-//}
